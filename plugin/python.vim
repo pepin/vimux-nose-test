@@ -44,16 +44,32 @@ class NoseTest
     end
   end
 
+  def testruncmd
+    if Vim.evaluate('exists("g:NoseTestRunCmd")') != 0
+      "#{Vim.evaluate('g:NoseTestRunCmd')}"
+    else
+      "nosetests"
+    end
+  end
+
+  def noselinecmd
+    if Vim.evaluate('exists("g:NoseLineCmd")') != 0
+      "#{Vim.evaluate('g:NoseLineCmd')}"
+    else
+      "noseline"
+    end
+  end
+
   def run_all
-    send_to_vimux("#{virtualenv} nosetests '#{current_file}'")
+    send_to_vimux("#{virtualenv} #{testruncmd} '#{current_file}'")
   end
 
   def run_focused
-    send_to_vimux("#{virtualenv} noseline '#{current_file}' --line #{line_number}")
+    send_to_vimux("#{virtualenv} #{noselinecmd} '#{current_file}' --line #{line_number}")
   end
 
   def send_to_vimux(test_command)
-    Vim.command("call RunVimTmuxCommand(\"clear && #{test_command}\")")
+    Vim.command("call RunVimTmuxCommand(\"#{test_command}\")")
   end
 end
 EOF
