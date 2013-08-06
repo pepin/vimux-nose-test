@@ -69,7 +69,7 @@ class NoseTest
   end
 
   def send_to_vimux(test_command)
-    Vim.command("call RunVimTmuxCommand(\"#{test_command}\")")
+    Vim.command("call RunVimTmuxCommand(\"#{test_command} $NOSE_OPTS\")")
   end
 end
 EOF
