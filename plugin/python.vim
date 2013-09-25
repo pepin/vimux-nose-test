@@ -2,6 +2,11 @@ if exists("g:loaded_vimux_nose_test") || &cp
   finish
 endif
 let g:loaded_vimux_nose_test = 1
+map <silent> <LocalLeader>t :call VimuxRunCommand("run-tests.sh")<CR>
+map <silent> <LocalLeader>f :RunAllNoseTests<CR>
+map <silent> <Leader>t :call VimuxRunCommand("run-tests.sh")<CR>
+map <silent> <Leader>f :RunAllNoseTests<CR>
+map <silent> <LocalLeader>m :RunFocusedNoseTests<CR>
 
 if !has("ruby")
   finish
